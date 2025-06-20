@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>D&D - Debug & Destiny</title>
+<!-- Подключение шрифтов Google и Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+  /* Подключение вашего шрифта */
+  @font-face {
+    font-family: 'AlagardUnicode';
+    src: url('font/alagard-12px-unicode.ttf') format('truetype');
+    /* если есть другие форматы, добавьте их сюда */
+  }
+
+  /* Общие стили */
+  body {
+    margin: 0;
+    padding: 0 60px; /* увеличено почти в 2 раза */
+    font-family: 'AlagardUnicode', 'Roboto', sans-serif; /* ваш шрифт первым */
+    background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+    color: #fff;
+    line-height: 1.6;
+    /* Добавляем тень для всего тела для объема */
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Плавный скролл по якорям */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Шапка навигации */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(18, 18, 18, 0.9);
+    display: flex;
+    justify-content: center;
+    padding: 15px 10px;
+    z-index: 1000;
+    /* Тень для шапки */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  nav a {
+    font-weight: 700;
+    font-size: 1em;
+    padding: 8px 14px;
+    border-radius: 12px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  nav a:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+  }
+
+  /* Общие стили для разделов с увеличенной максимальной шириной */
+section {
+    padding: 80px 20px;
+    max-width: 1800px; /* остаётся тот же */
+    margin: 0 auto;
+    /* Добавляем тень к секциям */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border-radius: 10px; /* закругление для мягкого вида */
+  }
+
+  /* Заголовки */
+h1, h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Баннер */
+#hero {
+  background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+  padding: 150px 20px;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 70px;
+  position: relative;
+  overflow: hidden;
+  /* Тень для баннера */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+#hero h1 {
+  font-size: 2.8em;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-out;
+}
+
+#hero p {
+  font-size: 1.2em;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+  animation: fadeIn 1.5s ease-out;
+}
+
+/* Описание */
+#about {
+  background-color: #1f1f1f;
+  border-radius: 20px;
+  padding: 40px 20px;
+  margin-top: 20px;
+  text-align: center;
+  /* Тень для блока */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#about p {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* Блок с датой выхода игры */
+#release-date {
+  background-color: #2f2f2f;
+  border-radius: 20px;
+  padding: 30px 20px;
+  margin-top: 50px;
+  text-align: center;
+  /* Тень для блока */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#release-date h2 {
+  margin-bottom: 20px;
+}
+
+#release-date p {
+  font-size: 1.4em;
+  color: #ff0000; /* красный цвет */
+  margin: 0;
+  transition: color 0.5s ease;
+}
+
+/* Скриншоты */
+#screenshots {
+  margin-top: 50px;
+  text-align: center;
+  /* Тень для секции скриншотов */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+#screenshots h2 {
+  margin-bottom: 30px;
+}
+.scrolling-screenshots {
+  overflow: hidden;
+  width: 100%;
+}
+.screenshots-track {
+  display: flex;
+  width: calc(400px * 12);
+  animation: scroll-left 20s linear infinite;
+}
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.screenshot {
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* тень для изображений */
+}
+
+/* Вещи (заголовок + список) */
+#items {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Тень для секции */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+#items h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  font-weight: 700;
+}
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  padding: 0 10px;
+}
+.item-card {
+  background-color: #222;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-align: center;
+  /* Тень для карточек */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+.item-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: transform 0.3s;
+}
+.item-card:hover img {
+  transform: scale(1.05);
+}
+.item-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.item-desc {
+  font-size: 1em;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+/* Команда */
+#team {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Тень для секции */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+}
+#team .team-member {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#team .team-member.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.team-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #555;
+  transition: transform 0.3s;
+}
+.team-img:hover {
+  transform: scale(1.05);
+}
+
+/* Подвал */
+footer {
+  width: 100%;
+  background-color: #111;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 0.9em;
+  color: #999;
+  border-top: 3px solid #444;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Тень для подвала */
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+}
+footer p {
+  margin: 0;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+.footer-links a {
+  color: #ccc;
+  font-size: 1.5em;
+  transition: color 0.3s, transform 0.3s;
+}
+.footer-links a:hover {
+  color: #0ff;
+  transform: scale(1.2);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Адаптивность */
+@media(max-width: 768px){
+  #hero h1 {
+    font-size: 2em;
+  }
+  #hero p {
+    font-size: 1em;
+  }
+  #team {
+    flex-direction: column;
+  }
+  .team-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  footer {
+    font-size: 0.8em;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#hero">Главная</a>
+    <a href="#about">Описание</a>
+    <a href="#screenshots">Скриншоты</a>
+    <a href="#items">Вещи</a>
+    <a href="#team">Команда</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+</header>
+
+<!-- Баннер -->
+<section id="hero">
+  <h1>D&D - Debug & Destiny</h1>
+  <p>Интерактивная история о выборе пути! Учись, ошибайся и находи себя в мире, где каждое решение — твой выбор.</p>
+</section>
+
+<!-- Описание -->
+<section id="about">
+  <h2>О игре</h2>
+  <p>
+    Добро пожаловать в наш уникальный проект — визуальную новеллу, которая погружает тебя в захватывающий мир IT!  
+    Эта игра создана специально для тех, кто только начинает свой путь в сфере технологий или недавно вошёл в неё.  
+  </p>
+  <p>
+    В процессе игры ты познакомишься с различными направлениями в IT: разработкой, тестированием, дизайном, аналитикой и многими другими.  
+    Ты сможешь выбрать свой путь, узнаешь о профессиях, необходимых навыках и особенностях каждого направления.  
+  </p>
+  <p>
+    Используя стиль визуальной новеллы, мы сделаем обучение увлекательным и интерактивным — ты будешь смотреть, принимать решения и учиться через игровой опыт.  
+    Это отличный способ понять, как подготовиться к карьере в IT, избежать ошибок новичка и выбрать наиболее подходящее направление для себя.
+  </p>
+</section>
+
+<!-- Блок с датой выхода игры -->
+<section id="release-date">
+  <h2>Дата выхода игры</h2>
+  <p>
+    Планируемая дата выхода: <strong>1 января 2024</strong>
+  </p>
+</section>
+
+<!-- Скриншоты -->
+<section id="screenshots">
+  <h2>Скриншоты игры</h2>
+  <div class="scrolling-screenshots">
+    <div class="screenshots-track">
+      <img class="screenshot" src="images/screenshot1.png" alt="Скриншот 1" />
+      <img class="screenshot" src="images/screenshot2.png" alt="Скриншот 2" />
+      <img class="screenshot" src="images/screenshot3.png" alt="Скриншот 3" />
+      <img class="screenshot" src="images/screenshot4.png" alt="Скриншот 4" />
+      <img class="screenshot" src="images/screenshot5.png" alt="Скриншот 5" />
+      <img class="screenshot" src="images/screenshot6.png" alt="Скриншот 6" />
+      <!-- Повтор для бесконечности -->
+      <img class="screenshot" src="images/screenshot1.png" alt="Скриншот 1" />
+      <img class="screenshot" src="images/screenshot2.png" alt="Скриншот 2" />
+      <img class="screenshot" src="images/screenshot3.png" alt="Скриншот 3" />
+      <img class="screenshot" src="images/screenshot4.png" alt="Скриншот 4" />
+      <img class="screenshot" src="images/screenshot5.png" alt="Скриншот 5" />
+      <img class="screenshot" src="images/screenshot6.png" alt="Скриншот 6" />
+    </div>
+  </div>
+</section>
+
+<!-- Вещи (заголовок + список) -->
+<section id="items">
+  <h2>Вещи</h2>
+  <div class="items-container">
+    <!-- Вещь 1 -->
+    <div class="item-card">
+      <img src="images/item1.png" alt="Вещь 1" />
+      <div class="item-title">Паук</div>
+    </div>
+    <!-- Вещь 2 -->
+    <div class="item-card">
+      <img src="images/item2.png" alt="Вещь 2" />
+      <div class="item-title">Темный принц</div>
+    </div>
+    <!-- Вещь 3 -->
+    <div class="item-card">
+      <img src="images/item3.png" alt="Вещь 3" />
+      <div class="item-title">Пингвин-хакер</div>
+    </div>
+    <!-- Вещь 4 -->
+    <div class="item-card">
+      <img src="images/item4.png" alt="Вещь 4" />
+      <div class="item-title">Котенок</div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Наша команда</h2>
+  <div class="team-container">
+    <!-- Твой профиль -->
+    <div class="team-member">
+      <img src="images/myphoto.png" class="team-img" />
+      <div class="member-info">
+        <div class="member-name">allmuted</div>
+        <div class="member-desc">Разработчик</div>
+      </div>
+    </div>
+    <!-- Напарник -->
+    <div class="team-member">
+      <img src="images/naparnik.png" class="team-img" />
+      <div class="member-info">
+        <div class="member-name">blessed</div>
+        <div class="member-desc">Разработчик</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Подвал -->
+<footer>
+  <p>2025 Все права защищены</p>
+  <div class="footer-links">
+    <a href="https://t.me/your_telegram" target="_blank" aria-label="Telegram">
+      <i class="fab fa-telegram-plane"></i>
+    </a>
+    <a href="https://tiktok.com/@your_tiktok" target="_blank" aria-label="TikTok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+  </div>
+</footer>
+
+<!-- Скрипты -->
+<script>
+  // Анимация появления разделов при скролле
+  const sections = document.querySelectorAll('section');
+
+  const observerOptions = {
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  const teamMembers = document.querySelectorAll('.team-member');
+  teamMembers.forEach(member => {
+    const observer = new IntersectionObserver((entries, obs) => {
+      if(entries[0].isIntersecting){
+        entries[0].target.classList.add('visible');
+        obs.unobserve(entries[0].target);
+      }
+    }, {threshold: 0.2});
+    observer.observe(member);
+  });
+</script>
+
+</body>
+</html>
