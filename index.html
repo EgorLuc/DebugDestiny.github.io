@@ -4,26 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>D&D - Debug & Destiny</title>
-<!-- Подключение шрифтов Google и Font Awesome -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
-  /* Подключение вашего шрифта */
   @font-face {
     font-family: 'AlagardUnicode';
     src: url('font/alagard-12px-unicode.ttf') format('truetype');
-    /* если есть другие форматы, добавьте их сюда */
   }
 
-  /* Общие стили */
   body {
     margin: 0;
-    padding: 0 60px; /* увеличено почти в 2 раза */
-    font-family: 'AlagardUnicode', 'Roboto', sans-serif; /* ваш шрифт первым */
+    padding: 0 60px;
+    font-family: 'AlagardUnicode', 'Roboto', sans-serif;
     background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
     color: #fff;
     line-height: 1.6;
-    /* Добавляем тень для всего тела для объема */
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
   }
 
@@ -32,12 +27,10 @@
     text-decoration: none;
   }
 
-  /* Плавный скролл по якорям */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Шапка навигации */
   header {
     position: fixed;
     top: 0;
@@ -47,7 +40,6 @@
     justify-content: center;
     padding: 15px 10px;
     z-index: 1000;
-    /* Тень для шапки */
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 
@@ -70,17 +62,14 @@
     transform: translateY(-2px);
   }
 
-  /* Общие стили для разделов с увеличенной максимальной шириной */
 section {
     padding: 80px 20px;
-    max-width: 1800px; /* остаётся тот же */
+    max-width: 1800px;
     margin: 0 auto;
-    /* Добавляем тень к секциям */
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border-radius: 10px; /* закругление для мягкого вида */
+    border-radius: 10px;
   }
 
-  /* Заголовки */
 h1, h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -96,7 +85,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Баннер */
 #hero {
   background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
   padding: 150px 20px;
@@ -105,7 +93,6 @@ h2 {
   margin-top: 70px;
   position: relative;
   overflow: hidden;
-  /* Тень для баннера */
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
@@ -122,15 +109,13 @@ h2 {
   line-height: 1.5;
   animation: fadeIn 1.5s ease-out;
 }
-
-/* Описание */
+  
 #about {
   background-color: #1f1f1f;
   border-radius: 20px;
   padding: 40px 20px;
   margin-top: 20px;
   text-align: center;
-  /* Тень для блока */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
@@ -141,14 +126,12 @@ h2 {
   line-height: 1.6;
 }
 
-/* Блок с датой выхода игры */
 #release-date {
   background-color: #2f2f2f;
   border-radius: 20px;
   padding: 30px 20px;
   margin-top: 50px;
   text-align: center;
-  /* Тень для блока */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
@@ -158,16 +141,14 @@ h2 {
 
 #release-date p {
   font-size: 1.4em;
-  color: #ff0000; /* красный цвет */
+  color: #ff0000; 
   margin: 0;
   transition: color 0.5s ease;
 }
 
-/* Скриншоты */
 #screenshots {
   margin-top: 50px;
   text-align: center;
-  /* Тень для секции скриншотов */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   border-radius: 10px;
 }
@@ -193,16 +174,14 @@ h2 {
   object-fit: cover;
   margin-right: 10px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* тень для изображений */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
-/* Вещи (заголовок + список) */
 #items {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Тень для секции */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   border-radius: 10px;
 }
@@ -231,7 +210,6 @@ h2 {
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-align: center;
-  /* Тень для карточек */
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 .item-card:hover {
@@ -258,7 +236,6 @@ h2 {
   line-height: 1.4;
 }
 
-/* Команда */
 #team {
   margin-top: 50px;
   display: flex;
@@ -297,7 +274,6 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Подвал */
 footer {
   width: 100%;
   background-color: #111;
@@ -333,13 +309,11 @@ footer p {
   transform: scale(1.2);
 }
 
-/* Анимации */
 @keyframes fadeIn {
   from {opacity: 0; transform: translateY(20px);}
   to {opacity: 1; transform: translateY(0);}
 }
 
-/* Адаптивность */
 @media(max-width: 768px){
   #hero h1 {
     font-size: 2em;
@@ -373,13 +347,11 @@ footer p {
   </nav>
 </header>
 
-<!-- Баннер -->
 <section id="hero">
   <h1>D&D - Debug & Destiny</h1>
   <p>Интерактивная история о выборе пути! Учись, ошибайся и находи себя в мире, где каждое решение — твой выбор.</p>
 </section>
 
-<!-- Описание -->
 <section id="about">
   <h2>О игре</h2>
   <p>
@@ -396,7 +368,6 @@ footer p {
   </p>
 </section>
 
-<!-- Блок с датой выхода игры -->
 <section id="release-date">
   <h2>Дата выхода игры</h2>
   <p>
@@ -404,7 +375,6 @@ footer p {
   </p>
 </section>
 
-<!-- Скриншоты -->
 <section id="screenshots">
   <h2>Скриншоты игры</h2>
   <div class="scrolling-screenshots">
@@ -415,7 +385,6 @@ footer p {
       <img class="screenshot" src="images/screenshot4.png" alt="Скриншот 4" />
       <img class="screenshot" src="images/screenshot5.png" alt="Скриншот 5" />
       <img class="screenshot" src="images/screenshot6.png" alt="Скриншот 6" />
-      <!-- Повтор для бесконечности -->
       <img class="screenshot" src="images/screenshot1.png" alt="Скриншот 1" />
       <img class="screenshot" src="images/screenshot2.png" alt="Скриншот 2" />
       <img class="screenshot" src="images/screenshot3.png" alt="Скриншот 3" />
@@ -425,27 +394,21 @@ footer p {
     </div>
   </div>
 </section>
-
-<!-- Вещи (заголовок + список) -->
 <section id="items">
   <h2>Вещи</h2>
   <div class="items-container">
-    <!-- Вещь 1 -->
     <div class="item-card">
       <img src="images/item1.png" alt="Вещь 1" />
       <div class="item-title">Паук</div>
     </div>
-    <!-- Вещь 2 -->
     <div class="item-card">
       <img src="images/item2.png" alt="Вещь 2" />
       <div class="item-title">Темный принц</div>
     </div>
-    <!-- Вещь 3 -->
     <div class="item-card">
       <img src="images/item3.png" alt="Вещь 3" />
       <div class="item-title">Пингвин-хакер</div>
     </div>
-    <!-- Вещь 4 -->
     <div class="item-card">
       <img src="images/item4.png" alt="Вещь 4" />
       <div class="item-title">Котенок</div>
@@ -456,7 +419,6 @@ footer p {
 <section id="team">
   <h2>Наша команда</h2>
   <div class="team-container">
-    <!-- Твой профиль -->
     <div class="team-member">
       <img src="images/myphoto.png" class="team-img" />
       <div class="member-info">
@@ -464,7 +426,6 @@ footer p {
         <div class="member-desc">Разработчик</div>
       </div>
     </div>
-    <!-- Напарник -->
     <div class="team-member">
       <img src="images/naparnik.png" class="team-img" />
       <div class="member-info">
@@ -475,11 +436,10 @@ footer p {
   </div>
 </section>
 
-<!-- Подвал -->
 <footer>
   <p>2025 Все права защищены</p>
   <div class="footer-links">
-    <a href="https://t.me/your_telegram" target="_blank" aria-label="Telegram">
+    <a href="https://t.me/debuganddestiny" target="_blank" aria-label="Telegram">
       <i class="fab fa-telegram-plane"></i>
     </a>
     <a href="https://tiktok.com/@your_tiktok" target="_blank" aria-label="TikTok">
@@ -488,9 +448,7 @@ footer p {
   </div>
 </footer>
 
-<!-- Скрипты -->
 <script>
-  // Анимация появления разделов при скролле
   const sections = document.querySelectorAll('section');
 
   const observerOptions = {
